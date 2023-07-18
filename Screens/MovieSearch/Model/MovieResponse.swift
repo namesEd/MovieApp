@@ -7,18 +7,16 @@
 
 import Foundation
 
-struct MovieResponse: Decodable{
+struct MovieResponse: Decodable, Identifiable{
+    var id = UUID()
     let search: [Movie]
-    
     private enum CodingKeys: String, CodingKey {
         case search = "Search"
     }
-    
-    
     static let mock = MovieResponse(search: [Movie.mock])
 }
 
-struct Movie: Decodable, Identifiable {
+struct Movie: Decodable, Identifiable, Hashable {
     let id: String
     let title: String
     let type: String

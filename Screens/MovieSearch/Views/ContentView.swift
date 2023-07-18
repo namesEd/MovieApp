@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var searchText = "Titanic"
-    @StateObject var viewModel = MoviesViewModel()
+    @StateObject var viewModel = MoviesViewModel(service: MovieService())
     
     var body: some View {
         NavigationView {

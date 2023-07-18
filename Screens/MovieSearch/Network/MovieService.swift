@@ -9,13 +9,13 @@ import Foundation
 import Combine
 import SwiftUI
 
-class MovieService {
+protocol MovieServiceProtocol {
+    func fetchMovies(_ searchText: String) -> Future<[Movie], Error>}
+
+class MovieService: MovieServiceProtocol {
     var cancellable = Set<AnyCancellable>()
-    
     let urlString = "https://omdbapi.com/?i=tt3896198&apikey=97f4f729&s="
     
-    //TODO: fix the memory leak
-    //https://omdbapi.com/?i=tt3896198&apikey=97f4f729&s=Titanic
     func fetchMovies(_ searchText: String) -> Future<[Movie], Error> {
         return Future { promise in
             let finalUrlString = self.urlString + searchText // leaking memory
